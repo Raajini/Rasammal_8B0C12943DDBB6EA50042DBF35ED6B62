@@ -1,21 +1,44 @@
-# Python program to check if year is a leap year or not
+class BankAccount:
+    def __init__(self, account_number, account_holder_name, initial_balance):
+        self.__account_number = account_number
+        self.__account_holder_name = account_holder_name
+        self.__account_balance = initial_balance
 
-year = 2000
+    def deposit(self, amount):
+        if amount > 0:
+            self.__account_balance += amount
+            print(f"Deposited ${amount}. New balance: ${self.__account_balance}")
+        else:
+            print("Invalid deposit amount. Amount must be greater than 0.")
 
-# To get year (integer input) from the user
-# year = int(input("Enter a year: "))
+    def withdraw(self, amount):
+        if 0 < amount <= self.__account_balance:
+            self.__account_balance -= amount
+            print(f"Withdrew ${amount}. New balance: ${self.__account_balance}")
+        else:
+            print("Invalid withdrawal amount or insufficient funds.")
 
-# divided by 100 means century year (ending with 00)
-# century year divided by 400 is leap year
-if (year % 400 == 0) and (year % 100 == 0):
-    print("{0} is a leap year".format(year))
+    def display_balance(self):
+        print(f"Account Balance for {self.__account_holder_name}: ${self.__account_balance}")
 
-# not divided by 100 means not a century year
-# year divided by 4 is a leap year
-elif (year % 4 ==0) and (year % 100 != 0):
-    print("{0} is a leap year".format(year))
+    @property
+    def account_balance(self):
+        return self.__account_balance
 
-# if not divided by both 400 (century year) and 4 (not century year)
-# year is not leap year
-else:
-    print("{0} is not a leap year".format(year))
+
+# Example usage:
+if __name__ == "__main__":
+    # Create an instance of the BankAccount class
+    my_account = BankAccount("123456789", "John Doe", 1000)
+
+    # Deposit money
+    my_account.deposit(500)
+
+    # Withdraw money
+    my_account.withdraw(200)
+
+    # Display account balance
+    my_account.display_balance()
+
+    # Attempt to access account balance directly (this will work now)
+    print(f"Account Balance: ${my_account.account_balance}")
