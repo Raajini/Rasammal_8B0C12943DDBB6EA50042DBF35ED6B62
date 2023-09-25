@@ -1,44 +1,24 @@
-class BankAccount:
-    def __init__(self, account_number, account_holder_name, initial_balance):
-        self.__account_number = account_number
-        self.__account_holder_name = account_holder_name
-        self.__account_balance = initial_balance
+def linear_search_product(product_list, target_product):
+    """
+    Perform a linear search to find occurrences of the target product in the list.
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.__account_balance += amount
-            print(f"Deposited ${amount}. New balance: ${self.__account_balance}")
-        else:
-            print("Invalid deposit amount. Amount must be greater than 0.")
+    Parameters:
+    product_list (list): A list of product names.
+    target_product (str): The product name to search for.
 
-    def withdraw(self, amount):
-        if 0 < amount <= self.__account_balance:
-            self.__account_balance -= amount
-            print(f"Withdrew ${amount}. New balance: ${self.__account_balance}")
-        else:
-            print("Invalid withdrawal amount or insufficient funds.")
+    Returns:
+    list: A list of indices of occurrences of the target product, or an empty list if not found.
+    """
+    occurrences = []
 
-    def display_balance(self):
-        print(f"Account Balance for {self.__account_holder_name}: ${self.__account_balance}")
+    for index, product in enumerate(product_list):
+        if product == target_product:
+            occurrences.append(index)
 
-    @property
-    def account_balance(self):
-        return self.__account_balance
+    return occurrences
 
-
-# Example usage:
-if __name__ == "__main__":
-    # Create an instance of the BankAccount class
-    my_account = BankAccount("123456789", "John Doe", 1000)
-
-    # Deposit money
-    my_account.deposit(500)
-
-    # Withdraw money
-    my_account.withdraw(200)
-
-    # Display account balance
-    my_account.display_balance()
-
-    # Attempt to access account balance directly (this will work now)
-    print(f"Account Balance: ${my_account.account_balance}")
+# Example usage
+products = ["Apple", "Banana", "Orange", "Apple", "Banana"]
+target_product = "Apple"
+result = linear_search_product(products, target_product)
+print("Indices of occurrences of", target_product, ":", result)
